@@ -114,23 +114,15 @@ while running:
 
     # 填充背景颜色（RGB）
     screen.fill((0, 128, 255))
-
-    # 渲染玩家名字
-    name_text = font.render(f"{user1.name}", True, (255, 255, 255))
-    atk_text = font.render(f"ATK: {user1.atk}", True, (255, 255, 255))
-    hp_text = font.render(f"HP: {user1.hp}", True, (255, 255, 255))
     
     
+    #更新窗口事件
     window.LoadEvents(Events)
     window.updateWindow()
     window.drawWindow()
     if running == True:
         running = window.quitHandle()
     
-    # 把文字贴到屏幕上 (x, y 位置)    
-    screen.blit(name_text, (50, 50))
-    screen.blit(atk_text, (50, 100))
-    screen.blit(hp_text, (50, 150))
     # 控制帧率
     clock.tick(60)
     # 更新显示内容

@@ -10,6 +10,7 @@ class interfaceManager():
         self.font = pygame.font.SysFont("Arial", 40)
         self.menu = mainMenu(self.screen, self.font, self.basepath)
         self.gameworld = gameworld
+        self.gameworld.Initialize()
         
     def LoadEvents(self, events):
         self.event = events
@@ -29,6 +30,7 @@ class interfaceManager():
             self.gameworld.updateRemoveObjects()
             self.gameworld.updatePackageData()
             self.gameworld.updateDrawXY()
+            self.gameworld.GeneralUpdate()
         
     def updateWindow(self):
         choice = None
@@ -68,18 +70,14 @@ class mainMenu(loadtexture):
         
         midlength = (button_w // button_h) - 2 
         
-        self.buttons = {
-            "start": button(
-                self.basepath, midlength, button_h,  # tilesize=40
-                (screen_w - button_w) // 2, start_y,
-                self.screen
-            ),
-            "quit": button(
-                self.basepath, midlength, button_h,  # tilesize=40
-                (screen_w - button_w) // 2, start_y + button_h + spacing,
-                self.screen
-            ),
-        }
+        self.buttons = [
+        button(self.basepath, midlength, button_h,  # tilesize=40
+               (screen_w - button_w) // 2, start_y,
+               self.screen, "start", self.font),
+        button(self.basepath, midlength, button_h,
+               (screen_w - button_w) // 2, start_y + button_h + spacing,
+               self.screen, "quit", self.font)
+        ]
         
     def loadtex(self):
         bgpath = os.path.join(self.basepath, "Materials", "background", "cavebackground.png")
@@ -95,32 +93,43 @@ class mainMenu(loadtexture):
         
     def drawMenu(self):
         self.screen.blit(self.background, self.bg_rect)
-        for text, btn in self.buttons.items():
+        for btn in self.buttons:
             btn.drawButton()
-            label = self.font.render(text.upper(), True, (255, 255, 255))
-            self.screen.blit(label, (btn.x + 20, btn.y + 10))
             
     def clickHandle(self, events):
-        for e in events:
-            if e.type == pygame.MOUSEBUTTONDOWN:
-                mx, my = e.pos
-                for name, rect in self.buttons.items():
-                    if rect.collidepoint(mx, my):
-                        return name
-        return None  
+        for btn in self.buttons:
+            btn.loadEvents(events)
+            e = btn.eventsHandle()
+            if e != None:
+                return e
     
 class button(loadtexture):
-    def __init__(self, basepath, midlength, tilesize, x, y, screen):
+    def __init__(self, basepath, midlength, tilesize, x, y, screen, btnname, font):
         self.basepath =  basepath
         self.midlength = midlength
         self.x = x
         self.y = y
         self.screen = screen
         self.tilesize = tilesize #单个图块边长
+        self.btnname = btnname
+        self.font = font
         self.loadtex()
         
-    def loadEvents():
-        pass
+    def loadEvents(self, events):
+        self.events = events
+    
+    def eventsHandle(self):
+        for e in self.events:
+            if e.type != pygame.MOUSEBUTTONDOWN:
+                return None
+            mx, my = e.pos
+            if self.getRect().collidepoint(mx, my):
+                return self.btnname
+    
+    def getRect(self):
+        width = (self.midlength + 2) * self.tilesize
+        height = self.tilesize
+        return pygame.Rect(self.x, self.y, width, height)
     
     def loadtex(self):
         leftpath = os.path.join(self.basepath, "Materials", "button", "buttononeleft.png")
@@ -139,8 +148,18 @@ class button(loadtexture):
             self.screen.blit(self.middleimg, (self.x + (i + 1) * self.tilesize, self.y))
         self.screen.blit(self.rightimg, (self.x + self.midlength * self.tilesize, self.y))
         
+        label = self.font.render(self.btnname.upper(), True, (255, 255, 255))
+        label_rect = label.get_rect(center=self.getRect().center)
+        self.screen.blit(label, label_rect)
+        
+        mx, my = pygame.mouse.get_pos()
+        if self.getRect().collidepoint(mx, my):
+            dark_surface = pygame.Surface((self.getRect().width, self.getRect().height), pygame.SRCALPHA)
+            dark_surface.fill((0, 0, 0, 100))  # RGBA，最后一个是透明度
+            self.screen.blit(dark_surface, (self.x, self.y))
 
-
+        
+        
 class gameLoader(loadtexture):
     def __init__(self, screen, basepath):
         self.screen = screen

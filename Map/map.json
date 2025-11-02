@@ -1,0 +1,83 @@
+[
+  [
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    },
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    },
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    },
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    },
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    }
+  ],
+  [
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    },
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    },
+    {
+      "name": "stone",
+      "icon": "assets/stone.png",
+      "walkable": false
+    },
+    {
+      "name": "stone",
+      "icon": "assets/stone.png",
+      "walkable": false
+    },
+    {
+      "name": "stone",
+      "icon": "assets/stone.png",
+      "walkable": false
+    }
+  ],
+  [
+    {
+      "name": "air",
+      "icon": "assets/air.png",
+      "walkable": true
+    },
+    {
+      "name": "stone",
+      "icon": "assets/stone.png",
+      "walkable": false
+    },
+    {
+      "name": "stone",
+      "icon": "assets/stone.png",
+      "walkable": false
+    },
+    {
+      "name": "stone",
+      "icon": "assets/stone.png",
+      "walkable": false
+    },
+    {
+      "name": "stone",
+      "icon": "assets/stone.png",
+      "walkable": false
+    }
+  ]
+]

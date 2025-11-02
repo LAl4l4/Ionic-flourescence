@@ -1,6 +1,5 @@
 import pygame
 import random
-import noise
 import math
 from abc import ABC, abstractmethod
 import windowset
@@ -20,11 +19,23 @@ class GameWorld(windowset.loadtexture):#干脆就把整个gameworld类传进去�
         self.movable = movable
         self.screen = screen
         self.player = player
+        
+        self.font = pygame.font.SysFont("Arial", 40)
+        
         self.attackable = []
         self.canAttack = []
         self.obstacle = []
         self.removedObj = []
         self.DrawXYneeder = []
+
+    def Initialize(self):
+        self.CreateUI()
+
+    def CreateUI(self):
+        self.ingameui = InGameUI(self.player, self.font, self.screen)
+        
+    def GeneralUpdate(self):
+        self.ingameui.Draw()
 
     def loadtex(self):
         return super().loadtex()
@@ -177,7 +188,7 @@ class ScreenXYUpdater(HasCoordinate):
 
 class Drawable(HasCoordinate):
     @abstractmethod
-    def Draw():
+    def Draw(self):
         pass
        
 
@@ -296,6 +307,25 @@ class Player(Movable, CanAttack, Drawable, Attackable):
             return True
         return False
         
+class InGameUI(Drawable):
+    def __init__(self, player, font, screen):
+        self.player = player
+        self.font = font
+        self.screen = screen
+        
+    def Draw(self):
+        name_text = self.font.render(f"{self.player.name}", True, (255, 255, 255))
+        hp_text = self.font.render(f"HP: {self.player.hp}", True, (255, 255, 255))
+        self.screen.blit(name_text, (50, 50))
+        self.screen.blit(hp_text, (50, 150))
+        
+    def GetCoordinate(self):
+        return super().GetCoordinate()
+    
+    def GetScreenXY(self):
+        return super().GetScreenXY()
+        
+        
 class barrier(ScreenXYUpdater, Attackable, Drawable):
     def __init__(self,x,y,length, Img):
         self.x = x
@@ -347,7 +377,7 @@ class barrier(ScreenXYUpdater, Attackable, Drawable):
         if -self.length < self.ScreenX < WIDTH and -self.length < self.ScreenY < HEIGHT:
             screen.blit(self.Img, (self.ScreenX, self.ScreenY))
     
-class Map(Drawable):
+class Map(Drawable, windowset.loadtexture):
     def __init__(self,rowlen,collen,TileSize):
         self.IsCollidable = False
         self.x = 0
@@ -355,29 +385,26 @@ class Map(Drawable):
         self.ScreenX = 0
         self.ScreenY = 0
         
-        scale = 0.15
         self.TileSize = TileSize
         self.rowlen = rowlen
         self.collen = collen
-        self.map = [[0 for _ in range(collen)] for _ in range(rowlen)]
-        for i in range(rowlen):
-            for j in range(collen):
-                value = noise.pnoise2(i * scale, j * scale, octaves=4)
-                # 归一化到 0~1
-                norm_value = (value + 1) / 2  
-
-                # 根据区间分配不同地形
-                if norm_value < 0.4:
-                    tile = 1   # 水
-                elif norm_value < 0.45:
-                    tile = 2   # 沙滩
-                elif norm_value < 0.55:
-                    tile = 0   # 草地
-                elif norm_value < 0.6:
-                    tile = 6   # 深色草地
-                else:
-                    tile = 8   # 山地
-                self.map[i][j] = tile
+        self.mapbase = [[1,1,1,1,1],
+                        [1,1,2,2,2],
+                        [1,2,2,2,2]]
+        
+    def Initialize(self):
+        self.map = []
+        for row in self.mapbase:
+            newrow = []
+            for tile in row:
+                if tile == 1:
+                    newrow.append("air")
+                elif tile == 2:
+                    newrow.append("stone")
+            self.map.append(newrow)
+        
+    def loadtex(self):
+        return super().loadtex()
     
     @staticmethod    
     def getMap(rowlen,collen,TileSize):#外部调用方法
@@ -404,9 +431,14 @@ class Map(Drawable):
                 if -self.TileSize < screen_x < WIDTH and -self.TileSize < screen_y < HEIGHT:
                     screen.blit(texture, (screen_x, screen_y))
           
-class maptile():
-    def __init__(self, size):
+class maptile(windowset.loadtexture):
+    def __init__(self, size, basepath, collidable):
         self.size = size
+        self.basepath = basepath
+        self.collidable = collidable
+        
+    def loadtex(self):
+        return super().loadtex()
                     
 class Enemy(ScreenXYUpdater, CanAttack, Attackable, Movable, Drawable):
     def __init__(self,atk,hp,speed,radius, atkradius, Img):
