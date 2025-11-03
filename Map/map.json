@@ -1,83 +1,90 @@
-[
-  [
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    },
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    },
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    },
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    },
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    }
-  ],
-  [
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    },
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    },
-    {
-      "name": "stone",
-      "icon": "assets/stone.png",
-      "walkable": false
-    },
-    {
-      "name": "stone",
-      "icon": "assets/stone.png",
-      "walkable": false
-    },
-    {
-      "name": "stone",
-      "icon": "assets/stone.png",
-      "walkable": false
-    }
-  ],
-  [
-    {
-      "name": "air",
-      "icon": "assets/air.png",
-      "walkable": true
-    },
-    {
-      "name": "stone",
-      "icon": "assets/stone.png",
-      "walkable": false
-    },
-    {
-      "name": "stone",
-      "icon": "assets/stone.png",
-      "walkable": false
-    },
-    {
-      "name": "stone",
-      "icon": "assets/stone.png",
-      "walkable": false
-    },
-    {
-      "name": "stone",
-      "icon": "assets/stone.png",
-      "walkable": false
-    }
+{
+  "name": "start_cave",
+  "playerSpawn": {
+    "x": 200,
+    "y": 200
+  },
+  "map": [
+    [
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      },
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      },
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      },
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      },
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      }
+    ],
+    [
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      },
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      },
+      {
+        "code": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": false
+      },
+      {
+        "code": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": false
+      },
+      {
+        "code": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": false
+      }
+    ],
+    [
+      {
+        "code": "air",
+        "path": "",
+        "walkable": true
+      },
+      {
+        "code": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": false
+      },
+      {
+        "code": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": false
+      },
+      {
+        "code": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": false
+      },
+      {
+        "code": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": false
+      }
+    ]
   ]
-]
+}

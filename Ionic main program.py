@@ -21,19 +21,6 @@ bg_img_path = os.path.join(base_path, "Materials", "map_background.png")
 
 
 
-#地图纹理
-texture_img = pygame.image.load(bg_img_path).convert()
-tile_width = texture_img.get_width() // 3 - 1
-tile_height = texture_img.get_height() // 4 - 1
-
-textures = []
-for row in range(3):
-    for col in range(4):
-        rect = pygame.Rect(row * tile_width, col * tile_height, tile_width, tile_height)
-        tile = texture_img.subsurface(rect).copy()
-        tile = pygame.transform.scale(tile, (100, 100)) 
-        textures.append(tile)
-
 # 创建角色
 playername = "Cosmos"
 playeratk = 10
@@ -87,7 +74,7 @@ movable_objects = [
     *[(enemy, [user1]) for enemy in Enemies]
 ]
 drawable_objects = [ #后画的会覆盖先画的，所以地图要最先画
-    *[(gMap, [screen, textures, user1])],
+    *[(gMap, [screen, user1])],
     *[(bar, [screen, user1]) for bar in bars],
     *[(enemy, [screen, user1]) for enemy in Enemies],
     [user1, [screen, PlayerImg, PlayerImgRight]]

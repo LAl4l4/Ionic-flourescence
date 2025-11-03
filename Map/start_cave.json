@@ -1,0 +1,136 @@
+{
+  "name": "start_cave",
+  "playerSpawn": {
+    "x": 200,
+    "y": 200
+  },
+  "tile_info": {
+    "1": {
+      "code": 1,
+      "name": "back_stone",
+      "path": "Material/map/Tiles/boxCoin.png",
+      "walkable": false,
+      "upThroughable": false
+    },
+    "2": {
+      "code": 2,
+      "name": "stone",
+      "path": "Material/map/Tiles/castleCenter.png",
+      "walkable": true,
+      "upThroughable": false
+    }
+  },
+  "map": [
+    [
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "Material/map/Tiles/boxCoin.png",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Material/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ]
+  ]
+}

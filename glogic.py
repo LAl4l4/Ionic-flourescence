@@ -3,6 +3,7 @@ import random
 import math
 from abc import ABC, abstractmethod
 import windowset
+import os, json
 
 
 WIDTH, HEIGHT = 1200, 800
@@ -378,33 +379,62 @@ class barrier(ScreenXYUpdater, Attackable, Drawable):
             screen.blit(self.Img, (self.ScreenX, self.ScreenY))
     
 class Map(Drawable, windowset.loadtexture):
-    def __init__(self,rowlen,collen,TileSize):
+    def __init__(self, TileSize, screen):
         self.IsCollidable = False
         self.x = 0
         self.y = 0
         self.ScreenX = 0
         self.ScreenY = 0
+        self.screen = screen
         
         self.TileSize = TileSize
-        self.rowlen = rowlen
-        self.collen = collen
-        self.mapbase = [[1,1,1,1,1],
-                        [1,1,2,2,2],
-                        [1,2,2,2,2]]
+                
+        self.basepath = os.path.dirname(os.path.abspath(__file__))
         
-    def Initialize(self):
+    def Initialize(self, mapname):
+        self.name = mapname
+        self.read_from_json(mapname)
+        
+        
+    def read_from_json(self, mapname):    
+        filepath = f"{mapname}.json"
+        jsonpath = os.path.join("Map", filepath)
+        
+        self.jsonpath = os.path.join(self.basepath, jsonpath)
+        
+        with open(self.jsonpath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            
+        tileinfo = data["tile_info"]
+        self.tile_info = {int(code): info for code, info in tileinfo.items()}
+        
+        self.tile_grid_codes = [[tile["code"] for tile in row] for row in data["map"]]
+        self.rowlen = len(self.tile_grid_codes)
+        self.collen = len(self.tile_grid_codes[0])
+        
+    def loadmap(self):
         self.map = []
-        for row in self.mapbase:
+        for r in range(self.rowlen):
             newrow = []
-            for tile in row:
-                if tile == 1:
-                    newrow.append("air")
-                elif tile == 2:
-                    newrow.append("stone")
-            self.map.append(newrow)
-        
+            for c in range(self.collen):
+                code = self.tile_grid_codes[r][c]
+                info = self.tile_info[code]
+                
+                thistile = maptile(
+                    code = code,
+                    name = info["name"],
+                    path = info["path"],
+                    walkable = info["walkable"],
+                    up_throughable = info["upThroughable"],
+                    size = self.TileSize,
+                    basepath = self.basepath
+                )
+
+    
     def loadtex(self):
-        return super().loadtex()
+        self.texture = {}
+        for code, info in self.tile_info.items():
+            self.texture[code] = pygame.image.load(info["path"]).convert_alpha()
     
     @staticmethod    
     def getMap(rowlen,collen,TileSize):#外部调用方法
@@ -417,28 +447,30 @@ class Map(Drawable, windowset.loadtexture):
     def GetCoordinate(self):
         return self.x, self.y
     
-    def Draw(self, screen, textures, player):#map_obj是getmap返回的，textures是被切割好的图形数组
-        for row in range(self.rowlen):
-            for col in range(self.collen):
-                texture_index = self.map[row][col]
-                texture = textures[texture_index]
-
-                world_x = row * self.TileSize
-                world_y = col * self.TileSize
-                screen_x = world_x - player.player_x + player.Drawx
-                screen_y = world_y - player.player_y + player.Drawy
-
-                if -self.TileSize < screen_x < WIDTH and -self.TileSize < screen_y < HEIGHT:
-                    screen.blit(texture, (screen_x, screen_y))
+    def Draw(self, screen, textures, player):
+        pass
+       
           
 class maptile(windowset.loadtexture):
-    def __init__(self, size, basepath, collidable):
-        self.size = size
-        self.basepath = basepath
-        self.collidable = collidable
+    def __init__(self, code, path, walkable, up_throughable, size, basepath):
+        self.code = code
+        self.path = path
+        self.walkable = walkable          # 是否可走
+        self.up_throughable = up_throughable  # 是否可从下穿过
+        self.size = size                  # 格子大小（像素）
+        self.basepath = basepath          # 工程根目录
+        self.loadtex() 
         
     def loadtex(self):
-        return super().loadtex()
+        if not self.path:
+            self.texture = None
+            return
+
+        texpath = os.path.join(self.basepath, texpath)
+        self.texture = pygame.image.load(texpath).convert_alpha()
+        self.texture = pygame.transform.scale(self.texture, (self.size, self.size))
+        
+
                     
 class Enemy(ScreenXYUpdater, CanAttack, Attackable, Movable, Drawable):
     def __init__(self,atk,hp,speed,radius, atkradius, Img):
