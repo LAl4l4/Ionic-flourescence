@@ -11,14 +11,14 @@ TILE_INFO = {
     1: {
         "code": 1,
         "name": "back_stone", 
-        "path": "Material/map/Tiles/boxCoin.png", 
+        "path": "Materials/map/Tiles/boxCoin.png", 
         "walkable": False, 
         "upThroughable": False
         },
     2: {
         "code": 2,
         "name": "stone", 
-        "path": "Material/map/Tiles/castleCenter.png", 
+        "path": "Materials/map/Tiles/castleCenter.png", 
         "walkable": True,
         "upThroughable": False
         }

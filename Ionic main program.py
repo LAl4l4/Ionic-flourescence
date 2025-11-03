@@ -56,9 +56,8 @@ Enemies = [glogic.Enemy.getEnemy(
 
 # create map
 TileSize = 100
-rowlen = 2*WIDTH // TileSize
-collen = 2*HEIGHT // TileSize
-gMap = glogic.Map.getMap(rowlen,collen,TileSize)
+mapname = "start_cave"
+gMap = glogic.Map(TileSize, screen, mapname)
 
 
 # 字体对象

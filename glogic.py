@@ -379,7 +379,7 @@ class barrier(ScreenXYUpdater, Attackable, Drawable):
             screen.blit(self.Img, (self.ScreenX, self.ScreenY))
     
 class Map(Drawable, windowset.loadtexture):
-    def __init__(self, TileSize, screen):
+    def __init__(self, TileSize, screen, mapname):
         self.IsCollidable = False
         self.x = 0
         self.y = 0
@@ -388,12 +388,14 @@ class Map(Drawable, windowset.loadtexture):
         self.screen = screen
         
         self.TileSize = TileSize
-                
         self.basepath = os.path.dirname(os.path.abspath(__file__))
+        
+        self.Initialize(mapname)
         
     def Initialize(self, mapname):
         self.name = mapname
         self.read_from_json(mapname)
+        self.loadmap()
         
         
     def read_from_json(self, mapname):    
@@ -422,24 +424,19 @@ class Map(Drawable, windowset.loadtexture):
                 
                 thistile = maptile(
                     code = code,
-                    name = info["name"],
                     path = info["path"],
                     walkable = info["walkable"],
                     up_throughable = info["upThroughable"],
                     size = self.TileSize,
                     basepath = self.basepath
                 )
+                thistile.loadtex()
+                newrow.append(thistile)
+            self.map.append(newrow)
 
     
     def loadtex(self):
-        self.texture = {}
-        for code, info in self.tile_info.items():
-            self.texture[code] = pygame.image.load(info["path"]).convert_alpha()
-    
-    @staticmethod    
-    def getMap(rowlen,collen,TileSize):#外部调用方法
-        map = Map(rowlen,collen,TileSize)
-        return map
+        pass
     
     def GetScreenXY(self):
         return self.ScreenX, self.ScreenY
@@ -447,8 +444,19 @@ class Map(Drawable, windowset.loadtexture):
     def GetCoordinate(self):
         return self.x, self.y
     
-    def Draw(self, screen, textures, player):
-        pass
+    def Draw(self, screen, player):
+        for row in range(self.rowlen):
+            for col in range(self.collen):
+                tile = self.map[row][col]
+                if tile.texture is None:
+                    continue
+
+                world_x = col * self.TileSize
+                world_y = row * self.TileSize
+                screen_x = world_x - player.player_x + player.Drawx
+                screen_y = world_y - player.player_y + player.Drawy
+
+                tile.DrawTile(screen_x, screen_y, self.screen)
        
           
 class maptile(windowset.loadtexture):
@@ -466,12 +474,15 @@ class maptile(windowset.loadtexture):
             self.texture = None
             return
 
-        texpath = os.path.join(self.basepath, texpath)
+        texpath = os.path.join(self.basepath, self.path)
         self.texture = pygame.image.load(texpath).convert_alpha()
         self.texture = pygame.transform.scale(self.texture, (self.size, self.size))
         
-
-                    
+    def DrawTile(self, screenX, screenY, screen):
+        if -self.size < screenX < screen.get_width() and -self.size < screenY < screen.get_height():
+            screen.blit(self.texture, (screenX, screenY))
+        
+              
 class Enemy(ScreenXYUpdater, CanAttack, Attackable, Movable, Drawable):
     def __init__(self,atk,hp,speed,radius, atkradius, Img):
         self.hp = hp
