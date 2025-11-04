@@ -2,11 +2,9 @@ import json
 import os
 
 mapbase = [
-    [1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 2, 2, 2, 2, 2],
-    [1, 2, 2, 2, 2, 1, 1],
-    [1, 2, 2, 2, 2, 1, 1],
-    [1, 1, 2, 2, 2, 2, 2]
+    [1, 1, 1, 1, 1],
+    [1, 1, 2, 2, 2],
+    [1, 2, 2, 2, 2]
 ]
 
 TILE_INFO = {
@@ -26,50 +24,19 @@ TILE_INFO = {
         }
 }
 
-MAP_INFO = {
-    "height": 2400,
-    "width": 2000,
-    "tilesize": 150
-}
-
 playerSpawn = {
     "x": 200,
     "y": 200
-}
-
-enemy = [
-    {"id": 1, "spawn": (30, 50), "delay": 0},
-    {"id": 1, "spawn": (30, 50), "delay": 0},
-    {"id": 1, "spawn": (30, 50), "delay": 0}
-]
-    
-
-ENEMY_INFO = {
-    1: {
-        "id": 1,
-        "type": "normal",
-        "hp": 100,
-        "atk": 10,
-        "speed": 5,
-        "path": "",
-        "width": 30,
-        "height": 60 #How many times it should spawn after game start
-    }
 }
 
 mapName = "start_cave"
 
 gameMap = [[TILE_INFO[tile] for tile in row] for row in mapbase]
 
-#下方为json打包
-
 mapData = {
     "name": mapName,
     "playerSpawn": playerSpawn,
-    "enemy": enemy,
-    "enemy_info": ENEMY_INFO,
     "tile_info": TILE_INFO,
-    "map_info": MAP_INFO,
     "map": gameMap
 }
 
