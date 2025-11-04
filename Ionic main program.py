@@ -35,7 +35,8 @@ while running:
             running = False
 
     # 填充背景颜色（RGB）
-    screen.fill((30, 0, 0))
+    # 暗红色,但是开发过程还是用比较亮的颜色吧
+    screen.fill((30, 80, 80))
     
     
     #更新窗口事件

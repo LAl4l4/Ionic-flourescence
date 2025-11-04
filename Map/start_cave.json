@@ -46,7 +46,7 @@
     "1": {
       "code": 1,
       "name": "back_stone",
-      "path": "Materials/map/Tiles/boxCoin.png",
+      "path": "",
       "walkable": false,
       "upThroughable": false
     },
@@ -54,79 +54,345 @@
       "code": 2,
       "name": "stone",
       "path": "Materials/map/Tiles/castleCenter.png",
-      "walkable": false,
+      "walkable": true,
       "upThroughable": false
     }
   },
   "map_info": {
-    "height": 750,
-    "width": 1050,
-    "tilesize": 150
+    "height": 1600,
+    "width": 2400,
+    "tilesize": 100
   },
   "map": [
     [
       {
-        "code": 1,
-        "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       },
       {
-        "code": 1,
-        "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       },
       {
-        "code": 1,
-        "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       },
       {
-        "code": 1,
-        "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       },
       {
-        "code": 1,
-        "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       },
       {
-        "code": 1,
-        "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       },
       {
-        "code": 1,
-        "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       }
     ],
     [
       {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
       {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
@@ -134,152 +400,418 @@
         "code": 2,
         "name": "stone",
         "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
+        "walkable": true,
         "upThroughable": false
       }
     ],
     [
       {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
       {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
       {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
         "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       }
     ],
     [
       {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
-        "walkable": false,
-        "upThroughable": false
-      },
-      {
-        "code": 2,
-        "name": "stone",
-        "path": "Materials/map/Tiles/castleCenter.png",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
       {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
       {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
         "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       }
     ],
     [
       {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
       {
         "code": 1,
         "name": "back_stone",
-        "path": "Materials/map/Tiles/boxCoin.png",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
@@ -287,6 +819,48 @@
         "code": 2,
         "name": "stone",
         "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
@@ -294,6 +868,41 @@
         "code": 2,
         "name": "stone",
         "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
@@ -301,6 +910,22 @@
         "code": 2,
         "name": "stone",
         "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
@@ -308,6 +933,76 @@
         "code": 2,
         "name": "stone",
         "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
         "upThroughable": false
       },
@@ -315,7 +1010,1777 @@
         "code": 2,
         "name": "stone",
         "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
         "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 1,
+        "name": "back_stone",
+        "path": "",
+        "walkable": false,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      }
+    ],
+    [
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
+        "upThroughable": false
+      },
+      {
+        "code": 2,
+        "name": "stone",
+        "path": "Materials/map/Tiles/castleCenter.png",
+        "walkable": true,
         "upThroughable": false
       }
     ]
