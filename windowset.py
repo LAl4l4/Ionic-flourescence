@@ -3,14 +3,13 @@ from abc import ABC, abstractmethod
 import os
 
 class interfaceManager():
-    def __init__(self, screen, basepath, gameworld):
+    def __init__(self, screen, basepath):
         self.screen = screen
         self.window = "menu"
         self.basepath = basepath
         self.font = pygame.font.SysFont("Arial", 40)
         self.menu = mainMenu(self.screen, self.font, self.basepath)
-        self.gameworld = gameworld
-        self.gameworld.Initialize()
+
         
     def LoadEvents(self, events):
         self.event = events
@@ -160,13 +159,10 @@ class button(loadtexture):
 
         
         
-class gameLoader(loadtexture):
-    def __init__(self, screen, basepath):
+class gameWindow():
+    def __init__(self, screen):
         self.screen = screen
-        self.basepath = basepath
-    
-    def iniGame(self):
+        self.window = "start_cave"
+        
+    def iniGameWorld(self):
         pass
-    
-    def loadtex(self):
-        return super().loadtex()
