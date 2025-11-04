@@ -21,14 +21,14 @@ TILE_INFO = {
         "code": 2,
         "name": "stone", 
         "path": "Materials/map/Tiles/castleCenter.png", 
-        "walkable": True,
+        "walkable": False,
         "upThroughable": False
         }
 }
 
 MAP_INFO = {
-    "height": 2400,
-    "width": 2000,
+    "height": len(mapbase) * 150,
+    "width": len(mapbase[0]) * 150,
     "tilesize": 150
 }
 
@@ -39,8 +39,8 @@ playerSpawn = {
 
 enemy = [
     {"id": 1, "spawn": (30, 50), "delay": 0},
-    {"id": 1, "spawn": (30, 50), "delay": 0},
-    {"id": 1, "spawn": (30, 50), "delay": 0}
+    {"id": 1, "spawn": (80, 100), "delay": 0},
+    {"id": 1, "spawn": (1000, 2000), "delay": 0}
 ]
     
 
@@ -53,7 +53,8 @@ ENEMY_INFO = {
         "speed": 5,
         "path": "",
         "width": 30,
-        "height": 60 #How many times it should spawn after game start
+        "height": 60, #How many times it should spawn after game start
+        "path": "Materials/diren1.png"
     }
 }
 

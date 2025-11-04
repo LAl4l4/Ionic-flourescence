@@ -1,6 +1,7 @@
 import pygame
 from abc import ABC, abstractmethod
 import os
+import glogic
 
 class interfaceManager():
     def __init__(self, screen, basepath):
@@ -10,6 +11,10 @@ class interfaceManager():
         self.font = pygame.font.SysFont("Arial", 40)
         self.menu = mainMenu(self.screen, self.font, self.basepath)
 
+        self.loadGameWorld()
+        
+    def loadGameWorld(self):
+        self.gameworld = glogic.GameWorld(self.screen, "start_cave")
         
     def LoadEvents(self, events):
         self.event = events
@@ -23,12 +28,10 @@ class interfaceManager():
         if self.window == "menu":
             self.menu.drawMenu()
         elif self.window == "game":
-            self.gameworld.updateMove()
+            self.gameworld.Move()
             self.gameworld.Draw()
             self.gameworld.Attack()
             self.gameworld.updateRemoveObjects()
-            self.gameworld.updatePackageData()
-            self.gameworld.updateDrawXY()
             self.gameworld.GeneralUpdate()
         
     def updateWindow(self):
@@ -157,7 +160,6 @@ class button(loadtexture):
             dark_surface.fill((0, 0, 0, 100))  # RGBA，最后一个是透明度
             self.screen.blit(dark_surface, (self.x, self.y))
 
-        
         
 class gameWindow():
     def __init__(self, screen):

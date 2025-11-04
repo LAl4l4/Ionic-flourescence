@@ -2,7 +2,6 @@ import pygame
 import random
 import math
 from abc import ABC, abstractmethod
-import windowset
 import os, json
 
 #这是窗口的，不是地图的，地图的在self.width 和 self.height
@@ -10,10 +9,6 @@ WIDTH, HEIGHT = 1200, 800
 CENTER_X, CENTER_Y = WIDTH // 2, HEIGHT // 2
     
     
-# 把gameworld重构成一个只需要调用update和存数据的类，
-# 新加一个needupdate类，所有需要更新的都继承这个，更新逻辑有一个入口函数
-# 所有的更新比如move，attack都在对象内部完成，这个update方法接gameworld实例
-# gameworld实现各种接口方法，update所需要的内容都用接口方法实现
 
 class GameWorld():
     def __init__(self, screen, mapname):
@@ -26,11 +21,20 @@ class GameWorld():
         
     
     def Initialize(self):
+        self.totalObj = []
+        self.removedObj = []
+        
         self.basepath = os.path.dirname(os.path.abspath(__file__))
         self.loadjson()
         
-        self.Map = Map(self.tilesize, self.screen, self.mapname)
+        self.Map = Map(self.tilesize, self.mapname)
+        self.totalObj.append(self.Map)
+        
+        self.player = Player(self.basepath)
+        self.totalObj.append(self.player)
         self.CreateUI()
+        
+        
         
         
     def loadjson(self):
@@ -62,11 +66,14 @@ class GameWorld():
         return None
 
     def Move(self):
-        self.Move = []
+        self.movable = []
         
         for obj in self.totalObj:
             if isinstance(obj, MoveSys):
-                self.Move.append(obj)
+                self.movable.append(obj)
+                
+        for obj in self.movable:
+            obj.Move(self.Map, self.height, self.width)
         
             
     def updateDrawXY(self):
@@ -87,7 +94,7 @@ class GameWorld():
                 self.drawable.append(obj)
         
         for obj in self.drawable:
-            obj.Draw()
+            obj.Draw(self.screen)
     
                              
     def Attack(self):
@@ -114,8 +121,6 @@ class GameWorld():
             
         self.removedObj = []
 
-
-    
 
 class AtkSystem(ABC):
     def Atk(self, target, screen):
@@ -205,43 +210,92 @@ class Drawable(HasCoordinate):
     def Draw(self):
         pass
        
-class MoveSys(ABC, HasCoordinate):
-    def Move(self, map):
+class MoveSys(HasCoordinate):
+    def Move(self, map, mapheight, mapwidth):
         if isinstance(self, Player):
-            self.MovePlayer(map)
+            self.MovePlayer(map, mapheight, mapwidth)
         elif isinstance(self, Enemy):
             self.MoveEnemy()
             
-    def MovePlayer(self, map):
+    @abstractmethod
+    def loadXY(self, x, y):
+        pass
+    
+    @abstractmethod
+    def getWidthHeight(self):
+        pass
+            
+    def MovePlayer(self, map, height, width):
         keys = pygame.key.get_pressed()
-        
-        
+        #水平速度
+        self.vx = 0
+        if keys[pygame.K_a]:
+            self.vx = -self.speed
+            self.facing_right = False
+        elif keys[pygame.K_d]:
+            self.vx = self.speed
+            self.facing_right = True
+        #垂直速度 
         if keys[pygame.K_SPACE] and self.on_ground:
             self.vy = -self.jump_power
             self.on_ground = False
-            
+        self.vy += self.gravity
+        if self.vy > 20:  # 限制最大下落速度
+            self.vy = 20    
         
+        newx, newy = self.GetCoordinate()
+        
+        if self.CanMoveTo(map, height, width, newx + self.vx, newy):
+            newx += self.vx
+        
+        if self.CanMoveTo(map, height, width, newx, newy + self.vy):
+            newy += self.vy
+            self.on_ground = False
+        else:
+            # 被挡住 -> 如果是往下落说明落地了
+            if self.vy > 0:
+                self.on_ground = True
+            self.vy = 0  # 重置竖直速度
+        
+        self.loadXY(newx, newy)
+        
+    def CanMoveTo(self, map, height, width, newx, newy):
+        if newx < 0 or newy < 0:
+            return False
+        w, h = self.getWidthHeight()
+        if newx + w > width or newy + h > height:
+            return False
+
+        MoveObj_rect = pygame.Rect(newx, newy, w, h)
+        
+        map_tiles = map.getmap()
+        
+        for row_idx, row in enumerate(map_tiles):
+            for col_idx, tile in enumerate(row):
+                if not tile.getWalk():
+                    continue
+                tile_rect = pygame.Rect(col_idx * tile.size , row_idx * tile.size, tile.size, tile.size)
+                if MoveObj_rect.colliderect(tile_rect):
+                    return False
+        return True
 
     def MoveEnemy(self):
         pass
 
 class Player(MoveSys, CanAttack, Drawable, Attackable):
-    def __init__(self, NAME, ATK, HP, width, height):
-        self.player_width, self.player_height = width, height
-        self.player_speed = 10
-        self.name = NAME
-        self.atk = ATK
-        self.hp = HP
-        self.atkradius = 150
-        self.player_x, self.player_y = CENTER_X - self.player_width//2, CENTER_Y - self.player_height//2
-        self.Drawx, self.Drawy = CENTER_X - self.player_width//2, CENTER_Y - self.player_height//2
+    def __init__(self, basepath):
+        self.basepath = basepath
+        self.loadjson()
+        
+        self.player_x, self.player_y = CENTER_X - self.width//2, CENTER_Y - self.height//2
+        self.Drawx, self.Drawy = CENTER_X - self.width//2, CENTER_Y - self.height//2
         self.AtkCounter = 0
         self.facing_right = True 
         
         self.isdmgtick = False
         self.IsAttacking = False
         self.CanAtkWho = [barrier, Enemy]
-        self.IsCollidable = False
+
         self.atkType = "player"
         
         self.vx = 0
@@ -251,6 +305,29 @@ class Player(MoveSys, CanAttack, Drawable, Attackable):
         self.jump_power = 20
         self.on_ground = False
         
+    def loadjson(self):
+        filepath = "Player/player.json"
+        jsonpath = os.path.join(self.basepath, filepath)
+        
+        with open(jsonpath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            
+        self.hp = data["hp"]
+        self.atk = data["atk"]
+        self.name = data["name"]
+        self.height = data["height"]
+        self.width = data["width"]
+        self.speed = data["speed"]
+        self.atkradius = data["atkradius"]
+        
+        imgpath = os.path.join(self.basepath, data["path"])
+        self.imgleft = pygame.image.load(imgpath).convert_alpha()
+        self.imgleft = pygame.transform.scale(self.imgleft, (self.height, self.width))
+        self.imgright = pygame.transform.flip(self.imgleft, True, False)
+        
+        
+    def getWidthHeight(self):
+        return self.width, self.height
 
     def GetCoordinate(self):
         return self.player_x, self.player_y
@@ -259,13 +336,13 @@ class Player(MoveSys, CanAttack, Drawable, Attackable):
         return self.Drawx, self.Drawy
     
     def GetCenterCoordinate(self):    
-        return self.player_x + self.player_width//2, self.player_y + self.player_height//2
+        return self.player_x + self.width//2, self.player_y + self.height//2
          
-    def Draw(self, screen, ImgLeft, ImgRight):
+    def Draw(self, screen):
         if  self.facing_right:
-            screen.blit(ImgRight, (self.Drawx, self.Drawy))
+            screen.blit(self.imgright, (self.Drawx, self.Drawy))
         else:
-            screen.blit(ImgLeft, (self.Drawx, self.Drawy))
+            screen.blit(self.imgleft, (self.Drawx, self.Drawy))
     
     
     def AtkStatus(self, tglist):
@@ -288,8 +365,7 @@ class Player(MoveSys, CanAttack, Drawable, Attackable):
     
     def drawAtk(self,screen):
         attack_radius = self.atkradius
-        player_center = (self.Drawx + self.player_width//2,
-                         self.Drawy + self.player_height//2)
+        player_center = self.GetCenterCoordinate()
         # 半透明圆效果
         surface = pygame.Surface((2*attack_radius, 2*attack_radius), pygame.SRCALPHA)
         pygame.draw.circle(surface, (255, 255, 255, 80), (attack_radius, attack_radius), attack_radius)
@@ -298,33 +374,9 @@ class Player(MoveSys, CanAttack, Drawable, Attackable):
     def IsDamageTick(self):
         return self.isdmgtick
     
-    def Move(self, map):
-        keys = pygame.key.get_pressed()
-    # 水平方向移动
-        if keys[pygame.K_a]:
-            self.player_x -= self.player_speed
-            self.facing_right = False
-        if keys[pygame.K_d]:
-            self.player_x += self.player_speed
-            self.facing_right = True
-            
-        # 垂直方向移动
-        if keys[pygame.K_w]:
-            self.player_y -= self.player_speed
-        if keys[pygame.K_s]:
-            self.player_y += self.player_speed
-                   
-        self.boundary()
-    
-    def boundary(self):    
-        if self.player_x < 0:
-            self.player_x = 0
-        if self.player_x + self.player_width > 2*WIDTH:
-            self.player_x = 2*WIDTH - self.player_width
-        if self.player_y < 0:
-            self.player_y = 0
-        if self.player_y + self.player_height > 2*HEIGHT:
-            self.player_y = 2*HEIGHT - self.player_height
+    def loadXY(self, x, y):
+        self.player_x = x
+        self.player_y = y
             
        
 class InGameUI(Drawable):
@@ -397,14 +449,13 @@ class barrier(ScreenXYUpdater, Attackable, Drawable):
         if -self.length < self.ScreenX < WIDTH and -self.length < self.ScreenY < HEIGHT:
             screen.blit(self.Img, (self.ScreenX, self.ScreenY))
     
-class Map(Drawable, windowset.loadtexture):
-    def __init__(self, TileSize, screen, mapname):
+class Map(Drawable, ScreenXYUpdater):
+    def __init__(self, TileSize, mapname):
         self.IsCollidable = False
         self.x = 0
         self.y = 0
         self.ScreenX = 0
         self.ScreenY = 0
-        self.screen = screen
         
         self.TileSize = TileSize
         self.basepath = os.path.dirname(os.path.abspath(__file__))
@@ -453,17 +504,23 @@ class Map(Drawable, windowset.loadtexture):
                 newrow.append(thistile)
             self.map.append(newrow)
 
+    def getmap(self):
+        return self.map
+
+    def get_TileInfo(self):
+        return self.tile_info
     
-    def loadtex(self):
-        pass
-    
+    def LoadScreenCoordinate(self, X, Y):
+        self.ScreenX = X
+        self.ScreenY = Y
+
     def GetScreenXY(self):
         return self.ScreenX, self.ScreenY
     
     def GetCoordinate(self):
         return self.x, self.y
     
-    def Draw(self, player):
+    def Draw(self, screen):
         for row in range(self.rowlen):
             for col in range(self.collen):
                 tile = self.map[row][col]
@@ -472,13 +529,13 @@ class Map(Drawable, windowset.loadtexture):
 
                 world_x = col * self.TileSize
                 world_y = row * self.TileSize
-                screen_x = world_x - player.player_x + player.Drawx
-                screen_y = world_y - player.player_y + player.Drawy
+                screen_x = self.ScreenX + world_x
+                screen_y = self.ScreenY + world_y
 
-                tile.DrawTile(screen_x, screen_y, self.screen)
+                tile.DrawTile(screen_x, screen_y, screen)
        
           
-class maptile(windowset.loadtexture):
+class maptile():
     def __init__(self, code, path, walkable, up_throughable, size, basepath):
         self.code = code
         self.path = path
@@ -487,6 +544,9 @@ class maptile(windowset.loadtexture):
         self.size = size                  # 格子大小（像素）
         self.basepath = basepath          # 工程根目录
         self.loadtex() 
+        
+    def getWalk(self):
+        return self.walkable
         
     def loadtex(self):
         if not self.path:
