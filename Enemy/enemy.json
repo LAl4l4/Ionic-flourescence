@@ -1,0 +1,13 @@
+{
+  "1": {
+    "id": 1,
+    "type": "normal",
+    "hp": 100,
+    "atk": 10,
+    "speed": 5,
+    "path": "Materials/diren1.png",
+    "width": 150,
+    "height": 150,
+    "atkradius": 150
+  }
+}

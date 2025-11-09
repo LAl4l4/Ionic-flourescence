@@ -11,7 +11,7 @@ player = {
     "height": 150,
     "width": 150,
     "name": "Ionic",
-    "speed": 5,
+    "speed": 7,
     "atkradius": 150,
 }
 

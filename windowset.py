@@ -12,9 +12,13 @@ class interfaceManager():
         self.menu = mainMenu(self.screen, self.font, self.basepath)
 
         self.loadGameWorld()
+        self.loadWin()
         
     def loadGameWorld(self):
         self.gameworld = glogic.GameWorld(self.screen, "start_cave")
+        
+    def loadWin(self):
+        self.winpage = winPage(self.font)
         
     def LoadEvents(self, events):
         self.event = events
@@ -28,11 +32,11 @@ class interfaceManager():
         if self.window == "menu":
             self.menu.drawMenu()
         elif self.window == "game":
-            self.gameworld.Move()
+            self.gameworld.Refresh()
+        elif self.window == "winpage":
             self.gameworld.Draw()
-            self.gameworld.Attack()
-            self.gameworld.updateRemoveObjects()
-            self.gameworld.GeneralUpdate()
+            self.winpage.Draw(self.screen)
+            
         
     def updateWindow(self):
         choice = None
@@ -40,6 +44,8 @@ class interfaceManager():
             choice = self.menu.clickHandle(self.event)   
         elif self.window == "game":
             choice = self.gameworld.escapeHandle(self.event)
+        elif self.window == "winpage":
+            pass
                                   
         if choice == "start":
             self.window = "game"
@@ -47,6 +53,8 @@ class interfaceManager():
             self.window = "quit"
         elif choice == "menu":
             self.window = "menu"
+        elif choice == "win":
+            self.window = "winpage"
 
 class loadtexture(ABC):
     @abstractmethod
@@ -168,3 +176,19 @@ class gameWindow():
         
     def iniGameWorld(self):
         pass
+    
+class winPage():
+    def __init__(self, font):
+        self.font = font
+    
+    def Draw(self, screen):
+        overlay = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
+        overlay.fill((0, 0, 0, 128))  # 黑色半透明背景 (RGBA)
+        screen.blit(overlay, (0, 0))
+    
+    # “通关”文字
+        text = self.font.render("You Win!", True, (255, 255, 255))
+        text_rect = text.get_rect(center=screen.get_rect().center)
+        screen.blit(text, text_rect)
+    
+    

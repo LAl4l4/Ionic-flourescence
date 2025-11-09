@@ -1,8 +1,8 @@
 import pygame
 import random
-import math
-from abc import ABC, abstractmethod
 import os, json
+import Sys
+import ActEntity
 
 #这是窗口的，不是地图的，地图的在self.width 和 self.height
 WIDTH, HEIGHT = 1200, 800
@@ -34,52 +34,84 @@ class GameWorld():
         self.totalObj.append(self.player)
         self.CreateUI()
         
-        
-        
+    def Refresh(self):
+        self.Move()
+        self.Draw()
+        self.Attack()
+        self.updateRemoveObjects()
+        self.GeneralUpdate()
         
     def loadjson(self):
         filepath = f"{self.mapname}.json"
         jsonpath = os.path.join("Map", filepath)
         
-        self.jsonpath = os.path.join(self.basepath, jsonpath)
+        realpath = os.path.join(self.basepath, jsonpath)
         
-        with open(self.jsonpath, "r", encoding="utf-8") as f:
+        with open(realpath, "r", encoding="utf-8") as f:
             data = json.load(f)
             
         mapinfo = data["map_info"]
-        
         self.width = mapinfo["width"]
         self.height = mapinfo["height"]
         self.tilesize = mapinfo["tilesize"]
+        
+        self.enemyinfo = data["enemy"]
+        self.loadenemy()
+        
+        self.entity = data["entity"]
+        self.loadActEntity()
+        
+    def loadActEntity(self):
+        for e in self.entity:
+            x, y = e["position"]
+            if e["id"] == 1:
+                door = ActEntity.Door(x, y, self.basepath, e["id"], self.tilesize)
+                self.Door = door
+                self.totalObj.append(door)
+        
+    def loadenemy(self):
+        for e in self.enemyinfo:
+            x, y = e["spawn"]
+            enemy = Enemy(self.basepath, x, y, e["delay"], e["id"])
+            self.totalObj.append(enemy)
 
     def CreateUI(self):
         self.ingameui = InGameUI(self.player, self.font, self.screen)
         
     def GeneralUpdate(self):
         self.ingameui.Draw()
+        self.OpenDoor()
 
+    def OpenDoor(self):
+        for o in self.totalObj:
+            if isinstance(o, Enemy):
+                return
+        self.Door.setOpen(True)
     
     def escapeHandle(self, events):
         for e in events:
             if e.type == pygame.KEYDOWN and e.key == pygame.K_ESCAPE:
                 return "menu"
+        x, y = self.player.GetCenterCoordinate()
+        if self.Door.isCollide(x, y) and self.Door.isOpen():
+            return "win"
         return None
 
     def Move(self):
         self.movable = []
         
         for obj in self.totalObj:
-            if isinstance(obj, MoveSys):
+            if isinstance(obj, Sys.MoveSys):
                 self.movable.append(obj)
                 
         for obj in self.movable:
-            obj.Move(self.Map, self.height, self.width)
+            obj.Move(self.Map, self.height, self.width, self.player)
         
             
     def updateDrawXY(self):
         self.DrawXYneeder = []
         for obj in self.totalObj:
-            if isinstance(obj, ScreenXYUpdater):
+            if isinstance(obj, Sys.ScreenXYUpdater):
                 self.DrawXYneeder.append(obj)
                 
         for obj in self.DrawXYneeder:
@@ -90,7 +122,7 @@ class GameWorld():
         
         self.drawable = []
         for obj in self.totalObj:
-            if isinstance(obj, Drawable):
+            if isinstance(obj, Sys.Drawable):
                 self.drawable.append(obj)
         
         for obj in self.drawable:
@@ -101,9 +133,9 @@ class GameWorld():
         self.canAttack = []
         self.attackable = []
         for obj in self.totalObj:
-            if isinstance(obj, CanAttack):
+            if isinstance(obj, Sys.CanAttack):
                 self.canAttack.append(obj)
-            if isinstance(obj, Attackable):
+            if isinstance(obj, Sys.Attackable):
                 self.attackable.append(obj)
             
         for obj in self.canAttack:
@@ -120,169 +152,9 @@ class GameWorld():
                 self.totalObj.remove(obj)
             
         self.removedObj = []
+         
 
-
-class AtkSystem(ABC):
-    def Atk(self, target, screen):
-        self.AtkStatus(target)
-        if not self.IsAttacking:
-            return
-        self.drawAtk(screen)
-        if not self.IsDamageTick():
-            return
-        for TargetObj in target:
-            if self.atkType == "player":
-                self.AtkPlayer(TargetObj, screen)
-            if self.atkType == "enemynormal":
-                self.AtkEnemyNormal(TargetObj, screen)
-            
-    def AtkPlayer(self, target, screen):    #need: IsAttacking，CanAtkWho，atk，hp
-        CanAtk = False
-        for obj in self.CanAtkWho:
-            if isinstance(target, obj):
-                CanAtk = True
-        if self.IsInRadius(target) and CanAtk:  
-            target.hp = target.hp - self.atk
-            target.drawOnAtk(screen)
-        
-    def AtkEnemyNormal(self, target, screen):  #need: IsAttacking，CanAtkWho，atk，hp
-        CanAtk = False
-        for obj in self.CanAtkWho:
-            if isinstance(target, obj):
-                CanAtk = True
-        if self.IsInRadius(target) and CanAtk:  
-            target.hp = target.hp - self.atk
-            target.drawOnAtk(screen)
-    
-    def IsInRadius(self, target): #need：x, y, atkradius
-        selfX, selfY = self.GetCenterCoordinate()
-        targetX, targetY = target.GetCenterCoordinate()
-        dx = selfX - targetX
-        dy = selfY - targetY
-        return dx*dx + dy*dy <= self.atkradius * self.atkradius
-    
-    @abstractmethod
-    def GetCenterCoordinate(self):    
-        pass
-    
-class Attackable(AtkSystem):
-    @abstractmethod
-    def drawOnAtk(self, screen):
-        pass
-    
-class CanAttack(AtkSystem):
-    @abstractmethod
-    def drawAtk(self, screen):
-        pass
-    
-    @abstractmethod
-    def AtkStatus(self, targetlist):#更新攻击状态
-        pass
-    
-    @abstractmethod
-    def IsDamageTick(self):
-        pass
-   
-class HasCoordinate(ABC):
-    @abstractmethod
-    def GetScreenXY(self):
-        pass
-    
-    @abstractmethod
-    def GetCoordinate(self):
-        pass
-
-class ScreenXYUpdater(HasCoordinate):
-    def updateScreenXY(self, player):
-        playerScreenX, playerScreenY = player.GetScreenXY()
-        playerX, playerY = player.GetCoordinate()
-        selfX, selfY = self.GetCoordinate()
-        screenX = selfX - playerX + playerScreenX
-        screenY = selfY - playerY + playerScreenY
-        self.LoadScreenCoordinate(screenX, screenY)
-
-    @abstractmethod
-    def LoadScreenCoordinate(self, X, Y):
-        pass
-
-class Drawable(HasCoordinate):
-    @abstractmethod
-    def Draw(self):
-        pass
-       
-class MoveSys(HasCoordinate):
-    def Move(self, map, mapheight, mapwidth):
-        if isinstance(self, Player):
-            self.MovePlayer(map, mapheight, mapwidth)
-        elif isinstance(self, Enemy):
-            self.MoveEnemy()
-            
-    @abstractmethod
-    def loadXY(self, x, y):
-        pass
-    
-    @abstractmethod
-    def getWidthHeight(self):
-        pass
-            
-    def MovePlayer(self, map, height, width):
-        keys = pygame.key.get_pressed()
-        #水平速度
-        self.vx = 0
-        if keys[pygame.K_a]:
-            self.vx = -self.speed
-            self.facing_right = False
-        elif keys[pygame.K_d]:
-            self.vx = self.speed
-            self.facing_right = True
-        #垂直速度 
-        if keys[pygame.K_SPACE] and self.on_ground:
-            self.vy = -self.jump_power
-            self.on_ground = False
-        self.vy += self.gravity
-        if self.vy > 20:  # 限制最大下落速度
-            self.vy = 20    
-        
-        newx, newy = self.GetCoordinate()
-        
-        if self.CanMoveTo(map, height, width, newx + self.vx, newy):
-            newx += self.vx
-        
-        if self.CanMoveTo(map, height, width, newx, newy + self.vy):
-            newy += self.vy
-            self.on_ground = False
-        else:
-            # 被挡住 -> 如果是往下落说明落地了
-            if self.vy > 0:
-                self.on_ground = True
-            self.vy = 0  # 重置竖直速度
-        
-        self.loadXY(newx, newy)
-        
-    def CanMoveTo(self, map, height, width, newx, newy):
-        if newx < 0 or newy < 0:
-            return False
-        w, h = self.getWidthHeight()
-        if newx + w > width or newy + h > height:
-            return False
-
-        MoveObj_rect = pygame.Rect(newx, newy, w, h)
-        
-        map_tiles = map.getmap()
-        
-        for row_idx, row in enumerate(map_tiles):
-            for col_idx, tile in enumerate(row):
-                if not tile.getWalk():
-                    continue
-                tile_rect = pygame.Rect(col_idx * tile.size , row_idx * tile.size, tile.size, tile.size)
-                if MoveObj_rect.colliderect(tile_rect):
-                    return False
-        return True
-
-    def MoveEnemy(self):
-        pass
-
-class Player(MoveSys, CanAttack, Drawable, Attackable):
+class Player(Sys.MoveSys, Sys.CanAttack, Sys.Drawable, Sys.Attackable):
     def __init__(self, basepath):
         self.basepath = basepath
         self.loadjson()
@@ -300,11 +172,11 @@ class Player(MoveSys, CanAttack, Drawable, Attackable):
         
         self.vx = 0
         self.vy = 0
-        self.speed = 5
-        self.gravity = 1.2
+        self.gravity = 1
         self.jump_power = 20
         self.on_ground = False
         
+
     def loadjson(self):
         filepath = "Player/player.json"
         jsonpath = os.path.join(self.basepath, filepath)
@@ -365,11 +237,12 @@ class Player(MoveSys, CanAttack, Drawable, Attackable):
     
     def drawAtk(self,screen):
         attack_radius = self.atkradius
-        player_center = self.GetCenterCoordinate()
+        player_center = self.GetScreenXY()
         # 半透明圆效果
         surface = pygame.Surface((2*attack_radius, 2*attack_radius), pygame.SRCALPHA)
         pygame.draw.circle(surface, (255, 255, 255, 80), (attack_radius, attack_radius), attack_radius)
-        screen.blit(surface, (player_center[0] - attack_radius, player_center[1] - attack_radius))
+        screen.blit(surface, (player_center[0] - attack_radius + self.width//2, 
+                              player_center[1] - attack_radius + self.height//2))
     
     def IsDamageTick(self):
         return self.isdmgtick
@@ -377,9 +250,12 @@ class Player(MoveSys, CanAttack, Drawable, Attackable):
     def loadXY(self, x, y):
         self.player_x = x
         self.player_y = y
+        
+    def getType(self):
+        return Player
             
        
-class InGameUI(Drawable):
+class InGameUI(Sys.Drawable):
     def __init__(self, player, font, screen):
         self.player = player
         self.font = font
@@ -398,7 +274,7 @@ class InGameUI(Drawable):
         return super().GetScreenXY()
         
     
-class barrier(ScreenXYUpdater, Attackable, Drawable):
+class barrier(Sys.ScreenXYUpdater, Sys.Attackable, Sys.Drawable):
     def __init__(self,x,y,length, Img):
         self.x = x
         self.y = y
@@ -449,7 +325,7 @@ class barrier(ScreenXYUpdater, Attackable, Drawable):
         if -self.length < self.ScreenX < WIDTH and -self.length < self.ScreenY < HEIGHT:
             screen.blit(self.Img, (self.ScreenX, self.ScreenY))
     
-class Map(Drawable, ScreenXYUpdater):
+class Map(Sys.Drawable, Sys.ScreenXYUpdater):
     def __init__(self, TileSize, mapname):
         self.IsCollidable = False
         self.x = 0
@@ -562,41 +438,60 @@ class maptile():
             screen.blit(self.texture, (screenX, screenY))
         
               
-class Enemy(ScreenXYUpdater, CanAttack, Attackable, MoveSys, Drawable):
-    def __init__(self,atk,hp,speed,radius, atkradius, Img):
-        self.hp = hp
-        self.atk = atk
-        self.speed = speed
-        self.radius = radius
-        self.x = random.randint(0, 2*WIDTH)
-        self.y = random.randint(0, 2*HEIGHT)
-        self.Img = Img
+class Enemy(Sys.ScreenXYUpdater, Sys.CanAttack, Sys.Attackable, Sys.MoveSys, Sys.Drawable):
+    def __init__(self, basepath, x, y, delay, id):
+        self.basepath = basepath
+        self.jsonpath = "Enemy/enemy.json"
+        
+        self.x = x
+        self.y = y
+        self.delay = delay
+        self.id = id
+        self.on_ground = False
+        self.gravity = 1
+        self.vx = 0
+        self.vy = 0
+        
         self.screen_x = self.x
         self.screen_y = self.y
         
         self.Counter = 0
-        self.atkradius = atkradius
         self.IsAttacking = False
         self.isdmgtick = False
         self.CanAtkWho = [Player]
         self.IsCollidable = False
         self.atkType = "enemynormal"
-    
-    def getEnemy(atk,hp,speed,radius,atkradius, Img):
-        enemy = Enemy(atk,hp,speed,radius,atkradius, Img)
-        return enemy
-    
-    def Move(self, notusedobst, player):
-        # 计算敌人到玩家的方向向量
-        dx = player.player_x - self.x
-        dy = player.player_y - self.y
-        distance = math.sqrt(dx**2 + dy**2)
-
-        # 如果距离大于0，按比例移动
-        if distance > 20:
-            self.x += self.speed * dx / distance
-            self.y += self.speed * dy / distance
+        
+        self.loadjson()
+        
+    def loadjson(self):
+        jsonpath = os.path.join(self.basepath, self.jsonpath)
+        
+        with open(jsonpath, "r", encoding="utf-8") as f:
+            data = json.load(f)
             
+        info = data[f"{self.id}"]    
+
+        self.hp = info["hp"]
+        self.atk = info["atk"]
+        self.speed = info["speed"]
+        self.width = info["width"]
+        self.height = info["height"]
+        self.atkradius = info["atkradius"]
+        
+        path = info["path"]
+        imgpath = os.path.join(self.basepath, path)
+        self.img = pygame.image.load(imgpath).convert_alpha()
+        self.img = pygame.transform.scale(self.img, (self.width, self.height))
+    
+    def getWidthHeight(self):
+        return self.width, self.height
+    
+    def loadXY(self, x, y):
+        self.x = x
+        self.y = y
+    
+       
     def GetCoordinate(self):
         return self.x, self.y
     
@@ -607,19 +502,18 @@ class Enemy(ScreenXYUpdater, CanAttack, Attackable, MoveSys, Drawable):
         self.screen_x = X
         self.screen_y = Y
     
-    def Draw(self, screen, player):
-        if -self.radius < self.screen_x < WIDTH and -self.radius < self.screen_y < HEIGHT:
-            screen.blit(self.Img, (self.screen_x, self.screen_y))
+    def Draw(self, screen):
+        if -self.width < self.screen_x < WIDTH and -self.height < self.screen_y < HEIGHT:
+            screen.blit(self.img, (self.screen_x, self.screen_y))
     
     def drawAtk(self, screen):
         attack_radius = self.atkradius
         x, y = self.GetScreenXY()
-        x = x + self.radius
-        y = y + self.radius
+
         # 半透明圆效果
         surface = pygame.Surface((2*attack_radius, 2*attack_radius), pygame.SRCALPHA)
         pygame.draw.circle(surface, (255, 255, 255, 80), (attack_radius, attack_radius), attack_radius)
-        screen.blit(surface, (x - attack_radius, y - attack_radius))
+        screen.blit(surface, (x - attack_radius + self.width//2, y - attack_radius + self.height//2))
     
     def AtkStatus(self, targetlist):
         Atk = False
@@ -648,11 +542,11 @@ class Enemy(ScreenXYUpdater, CanAttack, Attackable, MoveSys, Drawable):
     def drawOnAtk(self, screen):
         pass
     
-    def GetCenterCoordinate(self):
-        return self.x + self.radius, self.y + self.radius
+    def getType(self):
+        return Enemy
     
-class statusbar():
-    def __init__(self):
-        pass
+    def GetCenterCoordinate(self):
+        return self.x + self.width, self.y + self.height
+    
 
 

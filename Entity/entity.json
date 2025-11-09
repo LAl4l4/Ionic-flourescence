@@ -1,0 +1,10 @@
+{
+  "1": {
+    "code": 1,
+    "name": "exit",
+    "uppath": "Materials/map/Tiles/door_closedTop.png",
+    "downpath": "Materials/map/Tiles/door_closedMid.png",
+    "uppath_unlock": "Materials/map/Tiles/door_openTop.png",
+    "downpath_unlock": "Materials/map/Tiles/door_openMid.png"
+  }
+}

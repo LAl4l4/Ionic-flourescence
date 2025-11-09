@@ -7,17 +7,17 @@ mapbase = [
     # 1
     [2] + [1]*22 + [2],
     # 2
-    [2] + [1,1,2,2,1,1,1,1,1,2,2,1,1,1,1,2,2,1,1,1,1,1] + [2],
+    [2] + [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] + [2],
     # 3
-    [2] + [1,1,2,1,1,1,2,2,1,1,1,1,2,2,1,1,1,2,1,1,1,1] + [2],
+    [2] + [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] + [2],
     # 4
-    [2] + [1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,2,1,1,1,1,1] + [2],
+    [2] + [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1] + [2],
     # 5
-    [2] + [1,2,2,1,1,1,1,1,1,1,1,1,2,2,1,1,1,2,2,1,1,1] + [2],
+    [2] + [2]*22 + [2],
     # 6
-    [2] + [1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,2,2,1,1,1,1,1] + [2],
+    [2] + [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1] + [2],
     # 7
-    [2] + [1,1,2,2,1,1,1,1,1,1,2,2,1,1,1,1,1,1,2,2,1,1] + [2],
+    [2] + [1,1,1,1,1,1,1,1,1,1,2,2,1,1,1,1,1,1,2,2,1,1] + [2],
     # 8
     [2] + [1,1,1,1,1,2,2,1,1,1,1,1,2,2,1,1,1,1,1,1,1,1] + [2],
     # 9
@@ -59,32 +59,26 @@ MAP_INFO = {
     "tilesize": 100
 }
 
+Entity = [
+    {
+        "id":1,
+        "position":[1000,300]
+    }
+]
+    
+
+
 playerSpawn = {
     "x": 200,
     "y": 200
 }
 
 enemy = [
-    {"id": 1, "spawn": (30, 50), "delay": 0},
-    {"id": 1, "spawn": (80, 100), "delay": 0},
-    {"id": 1, "spawn": (1000, 2000), "delay": 0}
+    {"id": 1, "spawn": [200, 300], "delay": 0},
+    {"id": 1, "spawn": [300, 300], "delay": 0},
+    {"id": 1, "spawn": [800, 300], "delay": 0}#How many times it should spawn after game start
 ]
     
-
-ENEMY_INFO = {
-    1: {
-        "id": 1,
-        "type": "normal",
-        "hp": 100,
-        "atk": 10,
-        "speed": 5,
-        "path": "",
-        "width": 30,
-        "height": 60, #How many times it should spawn after game start
-        "path": "Materials/diren1.png"
-    }
-}
-
 mapName = "start_cave"
 
 gameMap = [[TILE_INFO[tile] for tile in row] for row in mapbase]
@@ -95,10 +89,10 @@ mapData = {
     "name": mapName,
     "playerSpawn": playerSpawn,
     "enemy": enemy,
-    "enemy_info": ENEMY_INFO,
     "tile_info": TILE_INFO,
     "map_info": MAP_INFO,
-    "map": gameMap
+    "map": gameMap,
+    "entity": Entity,
 }
 
 basepath = os.path.dirname(os.path.abspath(__file__))
