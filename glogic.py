@@ -11,9 +11,10 @@ CENTER_X, CENTER_Y = WIDTH // 2, HEIGHT // 2
     
 
 class GameWorld():
-    def __init__(self, screen, mapname):
+    def __init__(self, screen, mapname, player):
         self.mapname = mapname
         self.screen = screen
+        self.player = player
         
         self.font = pygame.font.SysFont("Arial", 40)
         self.tilesize = 150
@@ -30,7 +31,6 @@ class GameWorld():
         self.Map = Map(self.tilesize, self.mapname)
         self.totalObj.append(self.Map)
         
-        self.player = Player(self.basepath)
         self.totalObj.append(self.player)
         self.CreateUI()
         

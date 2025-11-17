@@ -1,0 +1,50 @@
+{
+  "tagsnum": 9,
+  "tags": {
+    "1": {
+      "tag": "slight attack",
+      "type": "atk",
+      "value": 5
+    },
+    "2": {
+      "tag": "moderate attack",
+      "type": "atk",
+      "value": 10
+    },
+    "3": {
+      "tag": "major attack",
+      "type": "atk",
+      "value": 15
+    },
+    "4": {
+      "tag": "slight health",
+      "type": "hp",
+      "value": 5
+    },
+    "5": {
+      "tag": "moderate health",
+      "type": "hp",
+      "value": 10
+    },
+    "6": {
+      "tag": "major health",
+      "type": "hp",
+      "value": 15
+    },
+    "7": {
+      "tag": "slight speed",
+      "type": "spd",
+      "value": 2
+    },
+    "8": {
+      "tag": "moderate speed",
+      "type": "spd",
+      "value": 3
+    },
+    "9": {
+      "tag": "major speed",
+      "type": "spd",
+      "value": 4
+    }
+  }
+}

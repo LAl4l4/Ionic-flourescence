@@ -1,6 +1,6 @@
 import pygame
 from abc import ABC, abstractmethod
-import os
+import os, random, json
 import glogic
 
 class interfaceManager():
@@ -10,12 +10,13 @@ class interfaceManager():
         self.basepath = basepath
         self.font = pygame.font.SysFont("Arial", 40)
         self.menu = mainMenu(self.screen, self.font, self.basepath)
-
-        self.loadGameWorld()
-        self.loadWin()
+        self.loadPlayer()
+    #玩家数据在不同地图间不能丢失，所以独立在地图外先创建再传进去    
+    def loadPlayer(self):
+        self.player = glogic.Player(self.basepath)
         
-    def loadGameWorld(self):
-        self.gameworld = glogic.GameWorld(self.screen, "start_cave")
+    def loadGameWindow(self):
+        self.gamewindow = gameWindow(self.screen, "normal", self.basepath, self.player, self.font)
         
     def loadWin(self):
         self.winpage = winPage(self.font)
@@ -32,9 +33,13 @@ class interfaceManager():
         if self.window == "menu":
             self.menu.drawMenu()
         elif self.window == "game":
-            self.gameworld.Refresh()
+            if not hasattr(self, "gamewindow"):
+                self.loadGameWindow()
+            self.gamewindow.Refresh()
         elif self.window == "winpage":
-            self.gameworld.Draw()
+            if not hasattr(self, "winpage"):
+                self.loadWin()
+            self.gamewindow.Draw()
             self.winpage.Draw(self.screen)
             
         
@@ -43,15 +48,21 @@ class interfaceManager():
         if self.window == "menu":
             choice = self.menu.clickHandle(self.event)   
         elif self.window == "game":
-            choice = self.gameworld.escapeHandle(self.event)
+            choice = self.gamewindow.clickHandle(self.event)
         elif self.window == "winpage":
-            pass
+            choice = self.winpage.clickHandle(self.event)
                                   
         if choice == "start":
             self.window = "game"
         elif choice == "quit":
             self.window = "quit"
         elif choice == "menu":
+            if self.window == "winpage":
+                if hasattr(self, "gamewindow"):
+                    del self.gamewindow
+                    del self.winpage
+                    del self.player
+                    self.loadPlayer()
             self.window = "menu"
         elif choice == "win":
             self.window = "winpage"
@@ -168,18 +179,176 @@ class button(loadtexture):
             dark_surface.fill((0, 0, 0, 100))  # RGBA，最后一个是透明度
             self.screen.blit(dark_surface, (self.x, self.y))
 
+class box():
+    def __init__(self, font, basepath, imgsize, player, tag, type, value):
+        self.font = font
+        self.basepath = basepath
+        self.imgsize = imgsize
+        self.player = player
+        self.tag = tag
+        self.type = type
+        self.value = value
+        self.loadtex()
+    
+    def loadtex(self):
+        bluebox = os.path.join(self.basepath, "Materials/bonus/lock_blue.png")
+        greenbox = os.path.join(self.basepath, "Materials/bonus/lock_green.png")
+        redbox = os.path.join(self.basepath, "Materials/bonus/lock_red.png")
+        
+        if self.type == "atk":
+            self.img = pygame.image.load(redbox).convert_alpha()
+        elif self.type == "hp":
+            self.img = pygame.image.load(greenbox).convert_alpha()
+        elif self.type == "spd":
+            self.img = pygame.image.load(bluebox).convert_alpha()
+            
+        self.img = pygame.transform.smoothscale(self.img, (self.imgsize, self.imgsize))
+            
+    def loadXY(self, x, y):
+        self.x = x
+        self.y = y
+            
+    def clickHandle(self, events):
+        if self.isClick(events):
+            if self.type == "atk":
+                self.player.atk += self.value
+            elif self.type == "hp":
+                self.player.hp += self.value
+            elif self.type == "spd":
+                self.player.speed += self.value
+            return True
+                
+    
+    def isClick(self, events):
+        for e in events:
+            if e.type == pygame.MOUSEBUTTONDOWN:
+                mx, my = e.pos
+                self.rect = pygame.Rect(self.x, self.y, self.imgsize, self.imgsize)
+                if self.rect.collidepoint(mx, my):
+                    return True
+        return False
+    
+    def Draw(self, screen):
+        screen.blit(self.img, (self.x, self.y))
+        label = self.font.render(f"{self.tag}", True, (255, 255, 255))
+        label_rect = label.get_rect(center=(self.x + self.imgsize // 2, self.y - 50))
+        screen.blit(label, label_rect)
+
+class bonusPage():
+    def __init__(self, basepath, imgsize, player, font):
+        self.basepath = basepath
+        self.imgsize = imgsize
+        self.player = player
+        self.font = font
+
+        self.loadbox(3)
+        
+    def loadbox(self, num):
+        tagpath = os.path.join(self.basepath, "bonustag", "bonus.json")
+        with open(tagpath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            
+        tagsnum = data["tagsnum"]
+        keys = list(range(1, tagsnum + 1))
+        selected_keys = random.sample(keys, num)
+        
+        self.box = []
+        tags = data["tags"]
+        for key in selected_keys:
+            type = tags[f"{key}"]["type"]
+            value = tags[f"{key}"]["value"]
+            tag = tags[f"{key}"]["tag"]
+            thisbox = box(self.font, self.basepath, self.imgsize, 
+                          self.player, tag, type, value)
+            self.box.append(thisbox)
+
+        
+    def Draw(self, screen):
+        screen.fill((30, 80, 80))
+        screen_width, screen_height = screen.get_size()
+        
+        gap = self.imgsize
+        num_boxes = len(self.box)
+        total_width = num_boxes*self.imgsize + (num_boxes-1)*gap
+        start_x = (screen_width - total_width) / 2
+        y = (screen_height - self.imgsize) / 2
+        for i, b in enumerate(self.box):
+            x = start_x + i*(self.imgsize + gap)
+            self.box[i].loadXY(x, y)
+            b.Draw(screen)
+               
+    def clickHandle(self, events):
+        for b in self.box:
+            if b.clickHandle(events):
+                return "game"
+        return None
+        
         
 class gameWindow():
-    def __init__(self, screen):
+    def __init__(self, screen, windowtype, basepath, player, font):
         self.screen = screen
-        self.window = "start_cave"
+        self.counter = 0
+        self.window = windowtype
+        self.basepath = basepath
+        self.player = player
+        self.font = font
+        self.randomWindow()
+        
+    def randomWindow(self):
+        self.counter += 1 
+        if hasattr(self, "gameworld"):
+            del self.gameworld
+        self.mapname = "start_cave"
+        self.iniGameWorld()
         
     def iniGameWorld(self):
-        pass
+        self.gameworld = glogic.GameWorld(self.screen, f"{self.mapname}", self.player)
+        
+    def iniBonus(self):
+        self.bonus = bonusPage(self.basepath, 150, self.player, self.font)
+    
+    def clickHandle(self, events):
+        choice = None
+        if self.window == "normal":
+            choice = self.gameworld.escapeHandle(events)
+        elif self.window == "bonus":
+            choice = self.bonus.clickHandle(events)
+            
+        if choice == "win" and self.counter >=3:
+            return "win"
+        elif choice == "win":
+            if hasattr(self, "bonus"):
+                del self.bonus
+            self.iniBonus()
+            self.window = "bonus"
+        elif choice == "game" and self.counter <=3:
+            self.window = "normal"
+            if hasattr(self, "gameworld"):
+                del self.gameworld
+            self.randomWindow()
+        elif choice == "game":
+            self.window = "boss"
+        elif choice == "menu":
+            return "menu"
+            
+    
+    #只绘制，用于最后的winpage 
+    def Draw(self):
+        self.gameworld.Draw()
+       
+    #执行游戏逻辑并绘制 
+    def Refresh(self):
+        if self.window == "normal":
+            self.gameworld.Refresh()
+        elif self.window == "bonus":          
+            self.bonus.Draw(self.screen)
+        
     
 class winPage():
     def __init__(self, font):
         self.font = font
+        self.timecounter = 0
+        self.waittime = 120
     
     def Draw(self, screen):
         overlay = pygame.Surface(screen.get_size(), pygame.SRCALPHA)
@@ -190,5 +359,15 @@ class winPage():
         text = self.font.render("You Win!", True, (255, 255, 255))
         text_rect = text.get_rect(center=screen.get_rect().center)
         screen.blit(text, text_rect)
+        
+    def clickHandle(self, event):
+        for e in event:
+            if e.type == pygame.MOUSEBUTTONDOWN:
+                return "menu"
+        
+        self.timecounter += 1
+        if self.timecounter > self.waittime:
+            return "menu"
+        return None
     
     
