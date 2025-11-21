@@ -9,5 +9,19 @@
     "width": 150,
     "height": 150,
     "atkradius": 150
+  },
+  "2": {
+    "id": 2,
+    "type": "ghost",
+    "hp": 80,
+    "atk": 12,
+    "speed": 4,
+    "width": 51,
+    "height": 73,
+    "atkradius": 120,
+    "path_active": "Enemy/img/ghost.png",
+    "path_normal": "Enemy/img/ghost_normal.png",
+    "path_hit": "Enemy/img/ghost_hit.png",
+    "path_dead": "Enemy/img/ghost_dead.png"
   }
 }

@@ -462,6 +462,11 @@ class Enemy(Sys.ScreenXYUpdater, Sys.CanAttack, Sys.Attackable, Sys.MoveSys, Sys
         self.IsCollidable = False
         self.atkType = "enemynormal"
         
+        # sprite/state support
+        self.sprites = None  # dict of state->surface if multiple images
+        self.hit_timer = 0
+        self.dead = False
+
         self.loadjson()
         
     def loadjson(self):
@@ -479,10 +484,37 @@ class Enemy(Sys.ScreenXYUpdater, Sys.CanAttack, Sys.Attackable, Sys.MoveSys, Sys
         self.height = info["height"]
         self.atkradius = info["atkradius"]
         
-        path = info["path"]
-        imgpath = os.path.join(self.basepath, path)
-        self.img = pygame.image.load(imgpath).convert_alpha()
-        self.img = pygame.transform.scale(self.img, (self.width, self.height))
+        # load sprites: support multiple state images for some enemies (ghost)
+        # preferred keys: path_active, path_normal, path_hit, path_dead
+        self.enemy_type = info.get("type", "normal")
+        if "path_active" in info or "path_normal" in info or "path_hit" in info or "path_dead" in info:
+            self.sprites = {}
+            # helper to load safely
+            def _load(relpath):
+                if not relpath:
+                    return None
+                p = os.path.join(self.basepath, relpath)
+                try:
+                    surf = pygame.image.load(p).convert_alpha()
+                    surf = pygame.transform.scale(surf, (self.width, self.height))
+                    return surf
+                except Exception:
+                    return None
+
+            self.sprites['active'] = _load(info.get('path_active'))
+            self.sprites['normal'] = _load(info.get('path_normal'))
+            self.sprites['hit'] = _load(info.get('path_hit'))
+            self.sprites['dead'] = _load(info.get('path_dead'))
+            # fallback single-image path if provided
+            if "path" in info and not any(self.sprites.values()):
+                p = os.path.join(self.basepath, info.get('path'))
+                self.img = pygame.image.load(p).convert_alpha()
+                self.img = pygame.transform.scale(self.img, (self.width, self.height))
+        else:
+            path = info.get("path")
+            imgpath = os.path.join(self.basepath, path)
+            self.img = pygame.image.load(imgpath).convert_alpha()
+            self.img = pygame.transform.scale(self.img, (self.width, self.height))
     
     def getWidthHeight(self):
         return self.width, self.height
@@ -540,13 +572,63 @@ class Enemy(Sys.ScreenXYUpdater, Sys.CanAttack, Sys.Attackable, Sys.MoveSys, Sys
         return self.isdmgtick
     
     def drawOnAtk(self, screen):
-        pass
+        # when being attacked, set a short hit timer to show hit sprite
+        self.hit_timer = 18
+        # small flash: you could draw an overlay here if desired
+        self.vy -= 10
     
     def getType(self):
         return Enemy
     
     def GetCenterCoordinate(self):
-        return self.x + self.width, self.y + self.height
+        return self.x + self.width//2, self.y + self.height//2
+
+    def Draw(self, screen):
+        # override Draw to support multi-sprite states and hit timer
+        if -self.width < self.screen_x < WIDTH and -self.height < self.screen_y < HEIGHT:
+            # reduce hit timer
+            if self.hit_timer > 0:
+                self.hit_timer -= 1
+
+            # dead state
+            if self.hp <= 0:
+                # try dead sprite first
+                if self.sprites and self.sprites.get('dead'):
+                    screen.blit(self.sprites['dead'], (self.screen_x, self.screen_y))
+                    return
+                # fallback to single image or drawn img
+                if hasattr(self, 'img'):
+                    screen.blit(self.img, (self.screen_x, self.screen_y))
+                    return
+                return
+
+            # hit state takes precedence
+            if self.hit_timer > 0 and self.sprites and self.sprites.get('hit'):
+                screen.blit(self.sprites['hit'], (self.screen_x, self.screen_y))
+                return
+
+            # attacking/active state
+            if self.IsAttacking and self.sprites and self.sprites.get('active'):
+                screen.blit(self.sprites['active'], (self.screen_x, self.screen_y))
+                return
+
+            # normal state
+            if self.sprites and self.sprites.get('normal'):
+                screen.blit(self.sprites['normal'], (self.screen_x, self.screen_y))
+                return
+
+            # fallback to single image
+            if hasattr(self, 'img'):
+                screen.blit(self.img, (self.screen_x, self.screen_y))
     
+
+class bossroom():
+    def __init__(self):
+        pass
+    
+class BossOne():
+    def __init__(self):
+        pass
+
 
 

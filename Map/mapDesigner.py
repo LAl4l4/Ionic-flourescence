@@ -74,8 +74,8 @@ playerSpawn = {
 }
 
 enemy = [
-    {"id": 1, "spawn": [200, 300], "delay": 0},
-    {"id": 1, "spawn": [300, 300], "delay": 0},
+    {"id": 2, "spawn": [200, 300], "delay": 0},
+    {"id": 2, "spawn": [300, 300], "delay": 0},
     {"id": 1, "spawn": [800, 300], "delay": 0}#How many times it should spawn after game start
 ]
     
