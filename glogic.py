@@ -232,7 +232,7 @@ class Player(Sys.MoveSys, Sys.CanAttack, Sys.Drawable, Sys.Attackable):
             return
         self.IsAttacking = False
            
-    def drawOnAtk(self, screen):
+    def OnAtk(self):
         pass
     
     def drawAtk(self,screen):
@@ -301,7 +301,7 @@ class barrier(Sys.ScreenXYUpdater, Sys.Attackable, Sys.Drawable):
         By = self.y - player.player_y + player.Drawy
         return Bx, By#返回障碍物在屏幕中的位置
 
-    def drawOnAtk(self, screen):
+    def OnAtk(self):
         pass
     
     def LoadScreenCoordinate(self, X, Y):
@@ -452,6 +452,11 @@ class Enemy(Sys.ScreenXYUpdater, Sys.CanAttack, Sys.Attackable, Sys.MoveSys, Sys
         self.vx = 0
         self.vy = 0
         
+        # 击退效果相关
+        self.knockback_vx = 0
+        self.knockback_vy = 0
+        self.knockback_decay = 0.8  # 击退衰减系数
+        
         self.screen_x = self.x
         self.screen_y = self.y
         
@@ -571,11 +576,14 @@ class Enemy(Sys.ScreenXYUpdater, Sys.CanAttack, Sys.Attackable, Sys.MoveSys, Sys
     def IsDamageTick(self):
         return self.isdmgtick
     
-    def drawOnAtk(self, screen):
+    def OnAtk(self):
         # when being attacked, set a short hit timer to show hit sprite
         self.hit_timer = 18
-        # small flash: you could draw an overlay here if desired
-        self.vy -= 10
+        # 应用击退效果：需要知道攻击者的位置来计算击退方向
+        # 这里使用简单的向上击退，如果需要方向性击退，可以传入攻击者坐标
+        self.knockback_vy = -15  # 向上击退
+        # 可以添加水平击退，根据攻击者位置判断
+        # 暂时设为0，在AtkPlayer/AtkEnemyNormal中可以根据攻击者位置计算
     
     def getType(self):
         return Enemy

@@ -83,6 +83,10 @@ class MapCanvas(QWidget):
         entities = self.editor.map_data.get('entity', [])
         for entity in entities:
             x, y = entity['position']
+            
+            x = x * 40/self.editor.reltilesize
+            y = y * 40/self.editor.reltilesize
+            
             screen_x = x * self.editor.zoom + self.editor.offset_x
             screen_y = y * self.editor.zoom + self.editor.offset_y
             
@@ -98,6 +102,10 @@ class MapCanvas(QWidget):
         enemies = self.editor.map_data.get('enemy', [])
         for enemy in enemies:
             x, y = enemy['spawn']
+            
+            x = x * 40/self.editor.reltilesize
+            y = y * 40/self.editor.reltilesize
+            
             screen_x = x * self.editor.zoom + self.editor.offset_x
             screen_y = y * self.editor.zoom + self.editor.offset_y
             
@@ -117,6 +125,10 @@ class MapCanvas(QWidget):
         """绘制玩家生成点"""
         spawn = self.editor.map_data.get('playerSpawn', {})
         x, y = spawn.get('x', 0), spawn.get('y', 0)
+        
+        x = x * 40/self.editor.reltilesize
+        y = y * 40/self.editor.reltilesize
+        
         screen_x = x * self.editor.zoom + self.editor.offset_x
         screen_y = y * self.editor.zoom + self.editor.offset_y
         
@@ -212,8 +224,7 @@ class MapEditorQt(QMainWindow):
         self.setWindowTitle(u"mapEditor - Qt6")
         self.setGeometry(100, 100, 1600, 1000)
         
-        # 地图数据
-        self.map_data = None
+        # 地图数据        self.map_data = None
         self.current_map_name = None
         self.basepath = os.path.dirname(os.path.abspath(__file__))
         
@@ -264,6 +275,7 @@ class MapEditorQt(QMainWindow):
     def create_right_panel(self):
         """创建右侧工具栏"""
         panel = QFrame()
+        
         layout = QVBoxLayout(panel)
         
         # 地图文件操作
@@ -395,6 +407,9 @@ R：重置视图
                 else:
                     self.center_view()
                 self.canvas.update()
+                
+                self.reltilesize = self.map_data.get('map_info', {}).get('tilesize', 40)
+                
                 self.statusBar().showMessage(u"地图已加载: {}".format(map_name))
                 return True
         except Exception as e:

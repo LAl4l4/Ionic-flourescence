@@ -22,7 +22,21 @@ class AtkSystem(ABC):
                 CanAtk = True
         if self.IsInRadius(target) and CanAtk:  
             target.hp = target.hp - self.atk
-            target.drawOnAtk(screen)
+            target.OnAtk()
+            
+            # 为敌人添加击退效果（根据攻击者位置计算方向）
+            from glogic import Enemy
+            if isinstance(target, Enemy):
+                selfX, selfY = self.GetCenterCoordinate()
+                targetX, targetY = target.GetCenterCoordinate()
+                dx = targetX - selfX
+                dy = targetY - selfY
+                # 归一化方向并应用击退力度
+                distance = (dx*dx + dy*dy) ** 0.5
+                if distance > 0:
+                    knockback_strength = 12
+                    target.knockback_vx = (dx / distance) * knockback_strength
+                    target.knockback_vy = (dy / distance) * knockback_strength - 8  # 额外向上分量
         
     def AtkEnemyNormal(self, target, screen):  #need: IsAttacking，CanAtkWho，atk，hp
         CanAtk = False
@@ -31,7 +45,7 @@ class AtkSystem(ABC):
                 CanAtk = True
         if self.IsInRadius(target) and CanAtk:  
             target.hp = target.hp - self.atk
-            target.drawOnAtk(screen)
+            target.OnAtk()
     
     def IsInRadius(self, target): #need：x, y, atkradius
         selfX, selfY = self.GetCenterCoordinate()
@@ -46,7 +60,7 @@ class AtkSystem(ABC):
     
 class Attackable(AtkSystem):
     @abstractmethod
-    def drawOnAtk(self, screen):
+    def OnAtk(self):
         pass
     
 class CanAttack(AtkSystem):
@@ -162,15 +176,30 @@ class MoveSys(HasCoordinate):
         return True
 
     def MoveEnemy(self, map, mapheight, mapwidth, player):
-        self.vx = 0
         x, y = self.GetCoordinate()
         px, py = player.GetCoordinate()
         
-        if x - px > 20:
-            self.vx -= self.speed
-        elif x - px < -20:
-            self.vx +=self.speed
+        # 如果有击退速度，优先应用击退
+        if abs(self.knockback_vx) > 0.5 or abs(self.knockback_vy) > 2:
+            # 应用击退速度
+            self.vx = self.knockback_vx
+            # knockback_vy 会被重力影响，所以直接加到vy上
+            self.vy = self.knockback_vy
+            # 衰减击退速度
+            self.knockback_vx *= self.knockback_decay
+            self.knockback_vy *= self.knockback_decay
+        else:
+            # 没有击退时，正常追踪玩家
+            self.knockback_vx = 0
+            self.knockback_vy = 0
             
+            self.vx = 0
+            if x - px > 20:
+                self.vx = -self.speed
+            elif x - px < -20:
+                self.vx = self.speed
+        
+        # 应用重力（无论是否在击退中）
         self.vy += self.gravity
         if self.vy > 20:
             self.vy = 20
@@ -180,6 +209,9 @@ class MoveSys(HasCoordinate):
         
         if self.CanMoveTo(map, mapheight, mapwidth, newx, y):
             x = newx
+        else:
+            # 碰到墙壁，停止水平击退
+            self.knockback_vx = 0
         
         if self.CanMoveTo(map, mapheight, mapwidth, x, newy):
             y = newy
@@ -187,6 +219,8 @@ class MoveSys(HasCoordinate):
         else:
             self.vy = 0
             self.on_ground = True
+            # 落地时停止垂直击退
+            self.knockback_vy = 0
             
         self.loadXY(x, y)
     

@@ -77,28 +77,32 @@ class mainMenu(loadtexture):
         self.screen = screen
         self.font = font
         self.basepath = basepath
+        # 创建大号标题字体（类似我的世界风格）
+        self.title_font = pygame.font.SysFont("Georgia", 80, bold=True, italic=True)
+        self.subtitle_font = pygame.font.SysFont("Georgia", 40, italic=True)
         self.setbutton()
         self.loadtex()
         
         
     def setbutton(self):
         screen_w, screen_h = self.screen.get_size()
-        button_w, button_h = screen_w//3, screen_h//10
-        spacing = button_h
+        button_h = screen_h // 12  # 按钮高度
+        midlength = 6  # 中间图块数量
         
-        total_height = 2 * button_h + spacing
-        start_y = (screen_h - total_height) // 2
+        # 计算按钮实际宽度：左边块 + 中间块们 + 右边块
+        button_w = (midlength + 2) * button_h
+        spacing = button_h // 2
         
-        midlength = (button_w // button_h) - 2 
+        start_y = screen_h * 0.6  # 放在屏幕下方60%的位置
         
         self.buttons = [
-        button(self.basepath, midlength, button_h,  # tilesize=40
+        button(self.basepath, midlength, button_h,
                (screen_w - button_w) // 2, start_y,
                self.screen, "start", self.font),
         button(self.basepath, midlength, button_h,
                (screen_w - button_w) // 2, start_y + button_h + spacing,
                self.screen, "quit", self.font)
-        ]
+        ]    
         
     def loadtex(self):
         bgpath = os.path.join(self.basepath, "Materials", "background", "cavebackground.png")
@@ -114,6 +118,31 @@ class mainMenu(loadtexture):
         
     def drawMenu(self):
         self.screen.blit(self.background, self.bg_rect)
+        
+        # 绘制标题（类似我的世界风格）
+        screen_w, screen_h = self.screen.get_size()
+        
+        # 主标题 "Ionic fluorescence" - 花体效果
+        title_text = "Ionic fluorescence"
+        title_surface = self.title_font.render(title_text, True, (255, 255, 255))
+        title_shadow = self.title_font.render(title_text, True, (50, 50, 50))
+        
+        title_rect = title_surface.get_rect(center=(screen_w // 2, screen_h * 0.25))
+        shadow_rect = title_rect.copy()
+        shadow_rect.x += 4
+        shadow_rect.y += 4
+        
+        # 先绘制阴影再绘制文字
+        self.screen.blit(title_shadow, shadow_rect)
+        self.screen.blit(title_surface, title_rect)
+        
+        # 可选：添加副标题或版本信息
+        subtitle = "Adventure Awaits"
+        subtitle_surface = self.subtitle_font.render(subtitle, True, (200, 200, 200))
+        subtitle_rect = subtitle_surface.get_rect(center=(screen_w // 2, screen_h * 0.35))
+        self.screen.blit(subtitle_surface, subtitle_rect)
+        
+        # 绘制按钮
         for btn in self.buttons:
             btn.drawButton()
             
@@ -148,6 +177,7 @@ class button(loadtexture):
                 return self.btnname
     
     def getRect(self):
+        # 左边1块 + 中间midlength-1块 + 右边1块 = midlength+1块
         width = (self.midlength + 2) * self.tilesize
         height = self.tilesize
         return pygame.Rect(self.x, self.y, width, height)
@@ -164,10 +194,13 @@ class button(loadtexture):
         self.rightimg = pygame.transform.smoothscale(self.rightimg, (self.tilesize, self.tilesize))
         
     def drawButton(self):
+        # 左边块
         self.screen.blit(self.leftimg, (self.x, self.y))
-        for i in range(self.midlength - 1):
+        # 中间块（midlength个）
+        for i in range(self.midlength):
             self.screen.blit(self.middleimg, (self.x + (i + 1) * self.tilesize, self.y))
-        self.screen.blit(self.rightimg, (self.x + self.midlength * self.tilesize, self.y))
+        # 右边块
+        self.screen.blit(self.rightimg, (self.x + (self.midlength + 1) * self.tilesize, self.y))
         
         label = self.font.render(self.btnname.upper(), True, (255, 255, 255))
         label_rect = label.get_rect(center=self.getRect().center)
